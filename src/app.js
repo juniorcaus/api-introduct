@@ -31,7 +31,17 @@ app.post('/create_post', async (req, res) => {
         }
 })
 
+app.get('/list_posts', async (req, res) => {
+   try {
+       const posts = await Post.find()
+
+       res.send({posts})
+   }catch(err) {
+    res.status(400).send(err)
+   }
+})
+
 
 app.listen(5000, () => {
     console.log('Server running on port:' + 5000 )        
-})  
+})
