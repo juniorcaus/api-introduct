@@ -1,11 +1,14 @@
 const mongoose = require('mongoose')
 
     mongoose.connect('mongodb://localhost/adc-api', {
-        useCreateIndex: true
+        useNewUrlParser: true,
+        useUniFiedTopology: true
+
     }).then(() => { 
         console.log('Mongo connected')
+
     }).catch(err => {
-        console.logo(err)
+        console.log(err)
     })
 
     module.exports = mongoose

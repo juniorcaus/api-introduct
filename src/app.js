@@ -2,6 +2,8 @@ const express = require('express')
 
 const app = express()
 
+const Post = require('./models/Posts')
+
 app.use(express.json());
 
 app.get('/hello_world', (req, res) => {
@@ -12,12 +14,24 @@ app.post('/create', (req, res) => {
 
     const title = req.body.title
 
-    
+    res.send(`title: ${title}`)
+})
 
-    res.send(`Titulo: ${title}`)
+app.post('/create_post', async (req, res) => {
+
+        try {
+            //const title = req.body.title   //const content = req.body.content
+            const {title, content} = req.body
+            
+            const post = await Post.create({ title, content })
+            
+            res.send(post)
+        }catch(err) {
+            res.status(400).send(err)
+        }
 })
 
 
 app.listen(5000, () => {
     console.log('Server running on port:' + 5000 )        
-})
+})  
