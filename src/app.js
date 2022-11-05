@@ -35,11 +35,24 @@ app.get('/list_posts', async (req, res) => {
    try {
        const posts = await Post.find()
 
-       res.send({posts})
+       res.send({ posts })
    }catch(err) {
     res.status(400).send(err)
    }
 })
+
+app.get('/show_post/:post_id', async (req, res) => {
+    try {
+        const postId = req.params.post_id
+
+        const post = await Post.findById(postId)
+        
+        res.send({post})
+    } catch(err) {
+        res.status(400).send(err)
+    }
+})
+
 
 
 app.listen(5000, () => {
