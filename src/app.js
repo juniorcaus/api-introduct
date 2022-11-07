@@ -53,6 +53,20 @@ app.get('/show_post/:post_id', async (req, res) => {
     }
 })
 
+app.patch('/update_post/:post_id', async (req, res) => {
+    try {   
+        const postId = req.params.post_id
+        
+        const { title, content }  = req.body
+
+        const post = await Post.findByIdAndUpdate(postId, { title, content }, { new: true })
+
+        res.send({ post })
+
+    } catch(err) {
+        res.status(400).send
+    }
+})
 
 
 app.listen(5000, () => {
