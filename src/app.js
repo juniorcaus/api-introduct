@@ -68,6 +68,19 @@ app.patch('/update_post/:post_id', async (req, res) => {
     }
 })
 
+app.delete('/delete_post/:post_id', async (req, res) => {
+    try {
+
+        const postId = req.params.post_id
+
+        await Post.findByIdAndDelete(postId)
+
+        res.send({ msg: 'Deletado com sucesso !' })
+
+    }catch(err) {
+        res.status(400).send(err)
+    }
+})
 
 app.listen(5000, () => {
     console.log('Server running on port:' + 5000 )        
