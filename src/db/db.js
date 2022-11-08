@@ -1,6 +1,8 @@
+
+
 const mongoose = require('mongoose')
 
-    mongoose.connect('mongodb://localhost/adc-api', {
+    mongoose.connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
         useUniFiedTopology: true
 

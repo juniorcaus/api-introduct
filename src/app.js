@@ -1,10 +1,16 @@
-const express = require('express')
+require('dotenv').config();
 
-const app = express()
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT;
+
+const cors = require('cors');
 
 const Post = require('./models/Posts')
 
 app.use(express.json());
+
+app.get(cors())
 
 app.get('/hello_world', (req, res) => {
     res.send('teste rota get')
@@ -82,6 +88,6 @@ app.delete('/delete_post/:post_id', async (req, res) => {
     }
 })
 
-app.listen(5000, () => {
-    console.log('Server running on port:' + 5000 )        
+app.listen(PORT, () => {
+    console.log('Server running on port:' + PORT )        
 })
